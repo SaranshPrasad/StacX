@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req,res) => {
-    res.json({msg:"Hellow from StackX"});
+    res.json({msg:"Hellow from StacX"});
 });
 
 
