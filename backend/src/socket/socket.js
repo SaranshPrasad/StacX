@@ -1,12 +1,12 @@
 const { Server } = require("socket.io");
 
 let io;
-
+require("dotenv").config();
 const initSocket = (server) => {
 
   io = new Server(server, {
     cors: {
-      origin: "*",
+      origin: process.env.FRONTEND_URL,
     },
   });
 

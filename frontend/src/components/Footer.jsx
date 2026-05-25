@@ -89,13 +89,7 @@ export default function Footer() {
       </div>
 
       
-      <button
-        onClick={scrollToTop}
-        className="sm:hidden fixed bottom-24 right-4 z-40 w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 active:scale-95 transition-transform"
-        aria-label="Scroll to top"
-      >
-        <ArrowUp size={20} />
-      </button>
+      
     </footer>
   );
 }

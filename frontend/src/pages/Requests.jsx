@@ -314,7 +314,6 @@ export default function RequestPage() {
           className="flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-500 px-5 py-3 rounded-2xl font-semibold"
         >
           <Plus size={18} />
-          New Request
         </button>
       </div>
 
