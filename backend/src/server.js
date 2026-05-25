@@ -5,9 +5,15 @@ const initSocket = require("./socket/socket");
 const connectDB = require("./database/config/connection");
 const cors = require("cors");
 const app = express();
-app.use(cors({
-    origin:"*"
-}));
+require("dotenv").config();
+const FRONTEND_URL = process.env.FRONTEND_URL;
+app.use(
+  cors({
+    origin: FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  })
+);
 const server = createServer(app);
 const io = initSocket(server);
 
