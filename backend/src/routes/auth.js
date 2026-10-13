@@ -3,7 +3,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../database/models/User");
 const protect = require("../middleware/auth");
-const cookieParser = require("cookie-parser")
+const cookieParser = require("cookie-parser");
+const Resources = require("../database/models/Resources");
+const Request = require("../database/models/Request");
 const router = express.Router();
 router.use(express.json());
 router.use(cookieParser());
@@ -151,19 +153,18 @@ router.post("/signup", async (req, res) => {
     // =========================
     // TOKEN
     // =========================
-    const token = jwt.sign(
-      {
-        id: user._id,
-        role: user.role,
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    // const token = jwt.sign(
+    //   {
+    //     id: user._id,
+    //     role: user.role,
+    //   },
+    //   process.env.JWT_SECRET,
+    //   { expiresIn: "7d" }
+    // );
 
     return res.status(201).json({
       success: true,
       message: "Signup successful",
-      token,
       user,
     });
   } catch (error) {
@@ -223,7 +224,8 @@ router.post("/login", async (req, res) => {
         expiresIn: "7d",
       }
     );
-
+    const uploaded = await Resources.find({uploadedBy: user._id}).countDocuments();
+    const requested = await Request.find({requestedBy: user._id}).countDocuments();
     res.status(200).json({
       success: true,
       message: "Login successful",
@@ -239,6 +241,8 @@ router.post("/login", async (req, res) => {
         semester: user.semester,
         avatar: user.avatar,
         verified: user.verified,
+        uploaded: uploaded,
+        requested
       },
     });
 

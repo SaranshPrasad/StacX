@@ -27,7 +27,7 @@ export default function MobileNavbar({
           Home
         </button>
 
-        <button
+        {/* <button
           onClick={() => setActiveTab("chat")}
           className={`flex flex-col items-center text-xs ${
             activeTab === "chat"
@@ -37,7 +37,7 @@ export default function MobileNavbar({
         >
           <MessageCircle size={20} />
           Chat
-        </button>
+        </button> */}
 
         <button
           onClick={() => setShowRequestModal(true)}

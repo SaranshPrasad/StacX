@@ -295,29 +295,29 @@ export default function Notifications() {
     };
 
   return (
-    <div className="min-h-screen  text-white px-4 py-6 sm:px-6 lg:px-10 max-w-7xl mx-auto px-4 md:px-8 pt-28 md:pt-36 pb-40">
+    <div className="min-h-screen text-slate-800 bg-slate-50 px-4 py-6 sm:px-6 lg:px-10 max-w-7xl mx-auto md:px-8 pt-28 md:pt-36 pb-40 transition-colors duration-200">
 
       {/* HEADER */}
 
       <div className="flex items-center gap-4 mb-8">
 
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center border border-indigo-500/20">
+        <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center border border-indigo-100 shadow-sm">
 
           <Bell
             size={24}
-            className="text-indigo-400"
+            className="text-indigo-600"
           />
 
         </div>
 
         <div>
 
-          <h1 className="text-3xl font-black">
+          <h1 className="text-3xl font-black text-slate-900 tracking-tight">
             Notifications
           </h1>
 
-          <p className="text-gray-500 text-sm mt-1">
-            Pending resource requests
+          <p className="text-slate-500 text-sm mt-1">
+            Pending resource requests from the student community
           </p>
 
         </div>
@@ -329,7 +329,7 @@ export default function Notifications() {
 
         <div className="flex justify-center py-20">
 
-          <div className="w-12 h-12 border-4 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin" />
+          <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
 
         </div>
       )}
@@ -340,19 +340,19 @@ export default function Notifications() {
         requests.length ===
           0 && (
 
-          <div className="bg-white/[0.03] border border-white/[0.06] rounded-3xl p-14 text-center">
+          <div className="bg-white border border-slate-200/80 shadow-sm rounded-3xl p-14 text-center">
 
             <CheckCircle2
               size={44}
-              className="mx-auto text-emerald-400 mb-4"
+              className="mx-auto text-emerald-600 mb-4 stroke-[2]"
             />
 
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-2xl font-bold text-slate-900">
               All Requests Solved
             </h2>
 
-            <p className="text-gray-500 mt-2">
-              No pending requests found.
+            <p className="text-slate-500 mt-2 text-sm">
+              No pending requests found right now. Great job!
             </p>
 
           </div>
@@ -369,95 +369,96 @@ export default function Notifications() {
               key={
                 request._id
               }
-              className="bg-white/[0.03] border border-white/[0.06] rounded-3xl p-5 hover:border-indigo-500/30 transition-all duration-300"
+              className="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-200 flex flex-col justify-between"
             >
+              <div>
+                {/* TOP */}
 
-              {/* TOP */}
+                <div className="flex items-start justify-between">
 
-              <div className="flex items-start justify-between">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center">
 
-                <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center">
+                    <FileText
+                      size={20}
+                      className="text-indigo-600"
+                    />
 
-                  <FileText
-                    size={20}
-                    className="text-indigo-400"
-                  />
+                  </div>
 
+                  <div className="flex items-center gap-1.5 text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full text-xs font-semibold">
+
+                    <Clock3 size={13} />
+
+                    Pending
+
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-2 text-amber-400 text-xs bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">
+                {/* MESSAGE */}
 
-                  <Clock3 size={12} />
+                <h2 className="text-lg font-bold text-slate-900 mt-4 leading-snug line-clamp-2">
 
-                  Pending
+                  {
+                    request.message
+                  }
 
+                </h2>
+
+                {/* DETAILS */}
+
+                <div className="mt-4 space-y-2 text-sm text-slate-600 border-t border-slate-100 pt-4">
+
+                  <p className="flex justify-between">
+                    <span className="text-slate-400 font-medium">Type:</span>
+                    <span className="text-indigo-600 capitalize font-semibold">
+                      {normalizeType(
+                        request.type
+                      )}
+                    </span>
+                  </p>
+
+                  <p className="flex justify-between">
+                    <span className="text-slate-400 font-medium">Course:</span>
+                    <span className="font-semibold text-slate-700 text-right truncate max-w-[180px]">
+                      {
+                        request
+                          .course
+                          ?.name || "-"
+                      }
+                    </span>
+                  </p>
+
+                  <p className="flex justify-between">
+                    <span className="text-slate-400 font-medium">Subject:</span>
+                    <span className="font-semibold text-slate-700 text-right truncate max-w-[180px]">
+                      {
+                        request
+                          .subject
+                          ?.name || "-"
+                      }
+                    </span>
+                  </p>
+
+                  <p className="flex justify-between">
+                    <span className="text-slate-400 font-medium">Semester:</span>
+                    <span className="font-semibold text-slate-700">
+                      {
+                        request.semester || "-"
+                      }
+                    </span>
+                  </p>
+
+                  <p className="flex justify-between">
+                    <span className="text-slate-400 font-medium">Requested By:</span>
+                    <span className="font-semibold text-slate-700 text-right truncate max-w-[160px]">
+                      {
+                        request
+                          .requestedBy
+                          ?.name || "-"
+                      }
+                    </span>
+                  </p>
                 </div>
-              </div>
-
-              {/* MESSAGE */}
-
-              <h2 className="text-lg font-bold mt-4 line-clamp-2">
-
-                {
-                  request.message
-                }
-
-              </h2>
-
-              {/* DETAILS */}
-
-              <div className="mt-4 space-y-2 text-sm text-gray-400">
-
-                <p>
-                  Type:{" "}
-                  <span className="text-indigo-400 capitalize font-medium">
-                    {normalizeType(
-                      request.type
-                    )}
-                  </span>
-                </p>
-
-                <p>
-                  Course:{" "}
-                  <span className="text-white">
-                    {
-                      request
-                        .course
-                        ?.name
-                    }
-                  </span>
-                </p>
-
-                <p>
-                  Subject:{" "}
-                  <span className="text-white">
-                    {
-                      request
-                        .subject
-                        ?.name
-                    }
-                  </span>
-                </p>
-
-                <p>
-                  Semester:{" "}
-                  <span className="text-white">
-                    {
-                      request.semester
-                    }
-                  </span>
-                </p>
-
-                <p>
-                  Requested By:{" "}
-                  <span className="text-white">
-                    {
-                      request
-                        .requestedBy
-                        ?.name
-                    }
-                  </span>
-                </p>
               </div>
 
               {/* BUTTON */}
@@ -468,10 +469,10 @@ export default function Notifications() {
                     request
                   )
                 }
-                className="mt-5 w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-90 rounded-2xl py-3 flex items-center justify-center gap-2 font-semibold transition-all"
+                className="mt-6 w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-2xl py-3 flex items-center justify-center gap-2 font-semibold shadow-lg shadow-indigo-500/20 transition-all transform hover:-translate-y-0.5 text-sm"
               >
 
-                <Upload size={18} />
+                <Upload size={16} />
 
                 Upload Resource
 
@@ -485,22 +486,22 @@ export default function Notifications() {
 
       {selectedRequest && (
 
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
 
-          <div className="w-full max-w-md bg-[#0a0f1e] border border-white/10 rounded-3xl overflow-hidden">
+          <div className="w-full max-w-md bg-white border border-slate-200 shadow-2xl rounded-3xl overflow-hidden transform transition-all">
 
             {/* HEADER */}
 
-            <div className="flex items-center justify-between p-6 border-b border-white/5">
+            <div className="flex items-center justify-between p-6 border-b border-slate-100">
 
               <div>
 
-                <h2 className="text-xl font-black">
+                <h2 className="text-xl font-black text-slate-900 tracking-tight">
                   Resolve Request
                 </h2>
 
-                <p className="text-gray-500 text-sm mt-1">
-                  Upload requested resource
+                <p className="text-slate-500 text-xs sm:text-sm mt-0.5">
+                  Upload the requested PDF resource
                 </p>
 
               </div>
@@ -520,7 +521,7 @@ export default function Notifications() {
                     ""
                   );
                 }}
-                className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all"
+                className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors"
               >
 
                 <X size={18} />
@@ -539,20 +540,20 @@ export default function Notifications() {
 
               {/* REQUEST TYPE */}
 
-              <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-2xl px-4 py-3 flex items-center gap-3">
+              <div className="bg-indigo-50 border border-indigo-100 rounded-2xl px-4 py-3 flex items-center gap-3">
 
                 <BookOpen
                   size={18}
-                  className="text-indigo-400"
+                  className="text-indigo-600 shrink-0"
                 />
 
                 <div>
 
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs font-medium text-slate-400">
                     Resource Type
                   </p>
 
-                  <p className="capitalize font-semibold text-indigo-300">
+                  <p className="capitalize font-bold text-indigo-700 text-sm">
                     {normalizeType(
                       selectedRequest.type
                     )}
@@ -566,31 +567,34 @@ export default function Notifications() {
               <input
                 type="text"
                 required
-                placeholder="Resource title"
+                placeholder="Resource title (e.g. Midterm PYQ Solutions)"
                 value={title}
                 onChange={(e) =>
                   setTitle(
                     e.target.value
                   )
                 }
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 outline-none"
+                className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-800 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500/15 transition-all text-sm font-medium"
               />
 
               {/* FILE */}
 
-              <label className="w-full h-36 border-2 border-dashed border-white/10 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:border-indigo-500/40 transition-all">
+              <label className="w-full h-36 border-2 border-dashed border-slate-200 bg-slate-50 hover:bg-indigo-50/20 rounded-2xl flex flex-col items-center justify-center cursor-pointer hover:border-indigo-500 transition-all p-4 text-center">
 
                 <Upload
-                  size={30}
-                  className="text-indigo-400 mb-2"
+                  size={28}
+                  className="text-indigo-600 mb-2"
                 />
 
-                <p className="text-sm text-gray-500">
+                <p className="text-sm font-semibold text-slate-700 truncate max-w-[280px]">
 
                   {file
                     ? file.name
-                    : "Click to upload PDF"}
+                    : "Click to upload PDF document"}
 
+                </p>
+                <p className="text-xs text-slate-400 mt-1">
+                  {file ? `${(file.size / (1024 * 1024)).toFixed(2)} MB` : "PDF format only"}
                 </p>
 
                 <input
@@ -609,13 +613,14 @@ export default function Notifications() {
 
               {/* INFO */}
 
-              <div className="flex items-center gap-2 text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-3 rounded-2xl">
+              <div className="flex items-center gap-2.5 text-xs text-amber-800 bg-amber-50 border border-amber-200 px-4 py-3 rounded-2xl font-medium">
 
                 <AlertCircle
-                  size={14}
+                  size={16}
+                  className="text-amber-600 shrink-0"
                 />
 
-                Uploading will automatically resolve this request.
+                <span>Uploading will automatically resolve and close this request.</span>
 
               </div>
 
@@ -626,7 +631,7 @@ export default function Notifications() {
                 disabled={
                   uploading
                 }
-                className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-90 rounded-2xl py-3.5 font-bold transition-all"
+                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-2xl py-3.5 font-bold transition-all shadow-lg shadow-indigo-500/20 disabled:opacity-50 text-sm sm:text-base flex items-center justify-center gap-2"
               >
 
                 {uploading

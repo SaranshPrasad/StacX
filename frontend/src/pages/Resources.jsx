@@ -284,7 +284,7 @@ export default function Resources() {
         `${import.meta.env.VITE_API_URL}/api/resources/download/${resource._id}`,
         "_blank"
       );
-
+      
 
     } catch (err) {
 
@@ -378,7 +378,7 @@ export default function Resources() {
 
           <div>
 
-            <h1 className="text-2xl sm:text-4xl font-black tracking-tight">
+            <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-gray-900/70">
               Resources Hub
             </h1>
 
@@ -412,7 +412,7 @@ export default function Resources() {
 
             <div className="flex items-center justify-between mb-6">
 
-              <h2 className="text-xl font-bold">
+              <h2 className="text-xl font-bold text-gray-900/70">
                 All Courses
               </h2>
 
@@ -426,7 +426,7 @@ export default function Resources() {
               </span>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4  ">
 
               {courses.map(
                 (course) => (
@@ -449,7 +449,7 @@ export default function Resources() {
 
                       setResources([]);
                     }}
-                    className="group cursor-pointer bg-white/[0.03] border border-white/[0.06] hover:border-indigo-500/40 hover:bg-white/[0.06] rounded-2xl p-4 transition-all duration-300"
+                    className="group cursor-pointer bg-white border border-black/[0.2] hover:border-indigo-500/40 hover:bg-white/[0.06] rounded-2xl p-4 transition-all duration-300"
                   >
 
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center">
@@ -461,7 +461,7 @@ export default function Resources() {
 
                     </div>
 
-                    <h3 className="text-sm font-bold mt-3 line-clamp-1">
+                    <h3 className="text-sm font-bold mt-3 line-clamp-1 text-gray-900/90">
                       {course.name}
                     </h3>
 
@@ -486,7 +486,7 @@ export default function Resources() {
 
             <button
               onClick={backToCourses}
-              className="mb-6 flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-xl text-sm"
+              className="mb-6 flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-xl text-sm text-gray-900/70"
             >
 
               <ArrowLeft size={16} />
@@ -515,7 +515,7 @@ export default function Resources() {
                         index + 1
                       );
                     }}
-                    className="cursor-pointer bg-white/[0.03] border border-white/[0.06] rounded-2xl p-4 text-center"
+                    className="cursor-pointer bg-black/[0.03] border border-black/[0.06] rounded-2xl p-4 text-center"
                   >
 
                     <p className="text-gray-600 text-[10px] uppercase">
@@ -543,7 +543,7 @@ export default function Resources() {
 
             <button
               onClick={backToSemesters}
-              className="mb-6 flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-xl text-sm"
+              className="mb-6 flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-xl text-sm text-gray-900/70"
             >
 
               <ArrowLeft size={16} />
@@ -570,10 +570,10 @@ export default function Resources() {
                         subject._id
                       );
                     }}
-                    className="cursor-pointer bg-white/[0.03] border border-white/[0.06] rounded-2xl p-4"
+                    className="cursor-pointer bg-black/[0.03] border border-black/[0.06] rounded-2xl p-4"
                   >
 
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500/20 to-purple-500/20 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500/20 to-purple-500/20 flex items-center justify-center text-gray-900/90">
 
                       <BookOpen
                         size={18}
@@ -582,11 +582,11 @@ export default function Resources() {
 
                     </div>
 
-                    <h3 className="text-sm font-bold mt-3">
+                    <h3 className="text-sm font-bold mt-3 text-gray-900">
                       {subject.name}
                     </h3>
 
-                    <p className="text-gray-600 mt-1 text-[11px]">
+                    <p className="text-gray-900 mt-1 text-[11px]">
                       {subject.code}
                     </p>
 
@@ -606,7 +606,7 @@ export default function Resources() {
 
             <button
               onClick={backToSubjects}
-              className="mb-6 flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-xl text-sm"
+              className="mb-6 flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-xl text-sm text-gray-900/70"
             >
 
               <ArrowLeft size={16} />
@@ -618,7 +618,7 @@ export default function Resources() {
 
               <div>
 
-                <h2 className="text-xl font-bold">
+                <h2 className="text-xl font-bold text-gray-900/70">
                   {selectedSubject.name}
                 </h2>
 
@@ -672,7 +672,7 @@ export default function Resources() {
 
                     <div
                       key={resource._id}
-                      className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-4"
+                      className="bg-black/[0.03] border border-black/[0.06] rounded-2xl p-4 text-gray-900/70"
                     >
 
                       <div className="flex items-start justify-between">
@@ -710,7 +710,7 @@ export default function Resources() {
                       </p>
                       <p className="text-[11px] text-gray-600 mt-2 flex gap-1">
 
-                        <Download className="text-white w-4 h-4" />
+                        <Download className="text-black w-4 h-4" />
                         <span>{resource?.downloads
                           || 0}</span>
 
@@ -754,7 +754,7 @@ export default function Resources() {
                           disabled={
                             isDownloading
                           }
-                          className="flex-1 bg-red hover:bg-white/10 border border-white/5 hover:border-white/10 text-gray-400 hover:text-white rounded-xl px-3 py-2.5 flex items-center justify-center gap-1.5 text-xs font-semibold transition-all "
+                          className="flex-1 hover:bg-red-600 hover:text-white bg-green-600 text-white cursor-pointer  rounded-xl px-3 py-2.5 flex items-center justify-center gap-1.5 text-xs font-semibold transition-all "
                         >
 
                           {isDownloading ? (

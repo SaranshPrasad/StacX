@@ -1,16 +1,15 @@
 const express = require("express");
 const protect = require("../middleware/auth");
 const authorizeRoles = require("../middleware/roleMiddleware");
-const User = require("../database/models/User")
+const User = require("../database/models/User");
+const Request = require("../database/models/Request");
+const Resources = require("../database/models/Resources");
 
 
 const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-// ==========================
-// GET MY PROFILE
-// ==========================
 router.get("/me", protect, async (req, res) => {
   try {
 
@@ -34,98 +33,12 @@ router.get("/me", protect, async (req, res) => {
 });
 
 
-// ==========================
-// UPDATE PROFILE
-// ==========================
-// router.patch("/update", protect, async (req, res) => {
-//   try {
-
-//     const data = req.body;
-
-//     const user = await User.findById(req.user.id);
-
-//     if (!user) {
-//       return res.status(404).json({
-//         success: false,
-//         message: "User not found",
-//       });
-//     }
-
-//     if (data?.name) user.name = name;
-//     if (data?.avatar) user.avatar = data?.avatar;
-//     if (data?.course) user.course = course;
-//     if (data?.semester) user.semester = semester;
-
-//     await user.save();
-
-//     res.json({
-//       success: true,
-//       message: "Profile updated successfully",
-//       user,
-//     });
-
-//   } catch (err) {
-//     res.status(500).json({ success: false, message: err.message });
-//   }
-// });
-// router.patch("/update", protect, async (req, res) => {
-//   try {
-//     const data = req.body;
-
-//     const user = await User.findById(req.user.id);
-
-//     if (!user) {
-//       return res.status(404).json({
-//         success: false,
-//         message: "User not found",
-//       });
-//     }
-
-//     // =========================
-//     // UPDATE ONLY PROVIDED FIELDS
-//     // =========================
-
-//     if (data?.name) {
-//       user.name = data.name;
-//     }
-
-//     if (data?.avatar) {
-//       user.avatar = data.avatar;
-//     }
-
-//     // only students should update these
-//     if (data?.course) {
-//       user.course = data.course;
-//     }
-
-//     if (data?.semester) {
-//       user.semester = data.semester;
-//     }
-
-//     await user.save();
-
-//     res.json({
-//       success: true,
-//       message: "Profile updated successfully",
-//       user,
-//     });
-
-//   } catch (err) {
-//     res.status(500).json({
-//       success: false,
-//       message: err.message,
-//     });
-//   }
-// });
-// ==========================================
-// BACKEND ROUTE
-// routes/user.js
-// ==========================================
 
 router.patch("/update", protect, async (req, res) => {
   try {
 
-    const {avatar} = req.body;
+    const {avatar, semester} = req.body;
+    
 
     const user = await User.findById(req.user.id);
 
@@ -134,12 +47,28 @@ router.patch("/update", protect, async (req, res) => {
       
     }
     user.avatar = avatar;
+    if(semester) {
+      user.semester = semester;
+    }
     await user.save();
+    const uploaded = await Resources.find({uploadedBy: user._id}).countDocuments();
+    const requested = await Request.find({requestedBy: user._id}).countDocuments();
 
     res.json({
       success: true,
       message: "Profile updated successfully",
-      user: user,
+       user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        course: user.course,
+        semester: user.semester,
+        avatar: user.avatar,
+        verified: user.verified,
+        uploaded: uploaded,
+        requested
+      },
     });
 
   } catch (err) {

@@ -13,7 +13,7 @@ import HomeLayout from "./pages/HomeLayout";
 
 import HomePage from "./pages/HomePage";
 import Resources from "./pages/Resources";
-import Chat from "./pages/Chat";
+// import Chat from "./pages/Chat";
 import Requests from "./pages/Requests";
 import Notifications from "./pages/Notifications";
 import Profile from "./pages/Profile";
@@ -34,11 +34,6 @@ function App() {
           <Route
             path="resources"
             element={<Resources />}
-          />
-
-          <Route
-            path="chat"
-            element={<Chat />}
           />
 
           <Route
